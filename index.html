@@ -224,6 +224,44 @@
       <article class="viz"><h3>Histogram</h3><svg viewBox="0 0 120 80" aria-hidden="true"><g fill="#007e87"><rect x="8" y="58" width="14" height="14"/><rect x="25" y="44" width="14" height="28"/><rect x="42" y="20" width="14" height="52"/><rect x="59" y="30" width="14" height="42"/><rect x="76" y="52" width="14" height="20"/></g></svg><p>분포와 꼬리</p></article><article class="viz"><h3>Box + points</h3><svg viewBox="0 0 120 80" aria-hidden="true"><path d="M20 40H100M45 20V60M75 20V60M45 20H75V60H45Z" fill="none" stroke="#b51f63" stroke-width="3"/></svg><p>Tool별 차이</p></article><article class="viz"><h3>Scatter</h3><svg viewBox="0 0 120 80" aria-hidden="true"><g fill="#007e87"><circle cx="18" cy="62" r="4"/><circle cx="35" cy="55" r="4"/><circle cx="52" cy="46" r="4"/><circle cx="69" cy="39" r="4"/><circle cx="90" cy="20" r="4"/></g></svg><p>두 변수의 관계</p></article><article class="viz"><h3>Line</h3><svg viewBox="0 0 120 80" aria-hidden="true"><path d="M8 60L27 50L44 55L61 33L79 38L103 15" fill="none" stroke="#bd6b00" stroke-width="4"/></svg><p>시간 변화·Drift</p></article><article class="viz"><h3>Heatmap</h3><svg viewBox="0 0 120 80" aria-hidden="true"><path d="M18 10h24v24H18z" fill="#d9eff0"/><path d="M45 10h24v24H45z" fill="#007e87"/><path d="M72 10h24v24H72z" fill="#8bc8cb"/><path d="M18 37h24v24H18z" fill="#b51f63"/><path d="M45 37h24v24H45z" fill="#f5dce7"/><path d="M72 37h24v24H72z" fill="#d16c98"/></svg><p>결측·상관 구조</p></article>
     </div></div></section>
 
+<section id="step8" class="section step-card" style="margin-top: 48px;">
+  <div class="section-head">
+    <span class="kicker">08 / ADVANCED GRAPHS</span>
+    <div>
+      <h2>추가로 활용하기 좋은 고급 통계 그래프</h2>
+      <p>이러한 고급 통계 그래프도 파이썬 데이터 시각화 라이브러리(Seaborn, Plotly 등)를 통해 언제든 활용할 수 있습니다.</p>
+    </div>
+  </div>
+  <div class="detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px;">
+    <section class="detail-block" style="background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border);">
+      <h4 style="margin-top:0; color: var(--text);">1. 바이올린 플롯 (Violin Plot)</h4>
+      <p style="font-size: 14px; color: var(--text-dim);"><strong>특징:</strong> Box plot과 데이터의 밀도(KDE)를 양옆으로 데칼코마니처럼 합친 그래프입니다.</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 0;"><strong>활용처:</strong> 단순한 평균/분산뿐만 아니라 데이터가 쌍봉형(낙타 등 모양)인지, 한쪽으로 쏠렸는지(Skewness) 굴곡을 정확히 볼 수 있습니다. 예) 특정 Tool(설비)에서 불량 데이터가 특정 구간에 군집해 있는지 확인할 때 탁월합니다.</p>
+    </section>
+    <section class="detail-block" style="background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border);">
+      <h4 style="margin-top:0; color: var(--text);">2. 조인트 플롯 / 마지널 산점도</h4>
+      <p style="font-size: 14px; color: var(--text-dim);"><strong>특징:</strong> 가운데는 산점도나 헥스빈(Hexbin)을 두고, 위쪽과 오른쪽에 변수의 히스토그램을 덧붙인 형태입니다.</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 0;"><strong>활용처:</strong> 'RF Bias와 식각 선택비'처럼 두 변수의 상관관계(가운데)와 각각의 쏠림 현상(가장자리 분포)을 한눈에 파악하고 싶을 때 매우 효과적입니다.</p>
+    </section>
+    <section class="detail-block" style="background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border);">
+      <h4 style="margin-top:0; color: var(--text);">3. 페어 플롯 (Pair Plot)</h4>
+      <p style="font-size: 14px; color: var(--text-dim);"><strong>특징:</strong> 여러 개의 변수들을 NxN 행렬 형태로 모두 짝지어 산점도와 히스토그램을 한 번에 그려주는 그래프입니다.</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 0;"><strong>활용처:</strong> 가스량, 압력, 온도, RF 파워 등 주요 공정 변수 간의 다차원적 관계를 그물망처럼 스캔할 때 초기 분석용으로 최적입니다.</p>
+    </section>
+    <section class="detail-block" style="background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border);">
+      <h4 style="margin-top:0; color: var(--text);">4. 평행 좌표계 플롯</h4>
+      <p style="font-size: 14px; color: var(--text-dim);"><strong>특징:</strong> 여러 세로축(변수)을 가로로 나열하고, 하나의 웨이퍼 데이터를 하나의 선(Line)으로 연결하여 그리는 그래프입니다.</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 0;"><strong>활용처:</strong> "과식각 불량이 발생한 웨이퍼들은 압력이 높고, 온도가 낮고, 플라즈마 파워가 튄다" 같은 복합적인 불량 레시피 패턴을 추적선 형태로 찾아낼 때 직관적입니다.</p>
+    </section>
+    <section class="detail-block" style="background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border);">
+      <h4 style="margin-top:0; color: var(--text);">5. 경험적 누적 분포 함수 (ECDF Plot)</h4>
+      <p style="font-size: 14px; color: var(--text-dim);"><strong>특징:</strong> 막대(Bin) 크기에 따라 모양이 변하는 단점을 극복하고, 데이터를 순서대로 누적(0%~100%)하여 선으로 그린 그래프입니다.</p>
+      <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 0;"><strong>활용처:</strong> T01 설비와 T02 설비의 CD Bias 상위 10%가 정확히 어느 수치부터 갈라지는지 수학적으로 명확하게 비교할 때 쓰입니다.</p>
+    </section>
+  </div>
+</section>
+
+
     <section id="topics"><div class="shell"><div class="section-head"><span class="index">08 / CHOOSE A CHALLENGE</span><div><h2>주제를 누르면 토론이 시작됩니다</h2><p>완성 수식이나 결론을 주지 않습니다. 팀이 질문·반박·검증을 반복할 수 있도록 교과 탐색 범위, 데이터 URL, 증거 기준만 제공합니다.</p></div></div><div class="topic-explorer">
       <div class="topic-menu" role="tablist" aria-label="반도체 AI 프로젝트 주제">
         <button class="topic" type="button" role="tab" aria-selected="true" data-topic="photo"><span class="num">01</span><span><strong>Photo PR 공정</strong><small>Dose·Focus·PR 조건 → CD 품질</small></span><span class="level">기본</span></button>
