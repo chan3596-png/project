@@ -224,20 +224,39 @@
       <article class="viz"><h3>Histogram</h3><svg viewBox="0 0 120 80" aria-hidden="true"><g fill="#007e87"><rect x="8" y="58" width="14" height="14"/><rect x="25" y="44" width="14" height="28"/><rect x="42" y="20" width="14" height="52"/><rect x="59" y="30" width="14" height="42"/><rect x="76" y="52" width="14" height="20"/></g></svg><p>분포와 꼬리</p></article><article class="viz"><h3>Box + points</h3><svg viewBox="0 0 120 80" aria-hidden="true"><path d="M20 40H100M45 20V60M75 20V60M45 20H75V60H45Z" fill="none" stroke="#b51f63" stroke-width="3"/></svg><p>Tool별 차이</p></article><article class="viz"><h3>Scatter</h3><svg viewBox="0 0 120 80" aria-hidden="true"><g fill="#007e87"><circle cx="18" cy="62" r="4"/><circle cx="35" cy="55" r="4"/><circle cx="52" cy="46" r="4"/><circle cx="69" cy="39" r="4"/><circle cx="90" cy="20" r="4"/></g></svg><p>두 변수의 관계</p></article><article class="viz"><h3>Line</h3><svg viewBox="0 0 120 80" aria-hidden="true"><path d="M8 60L27 50L44 55L61 33L79 38L103 15" fill="none" stroke="#bd6b00" stroke-width="4"/></svg><p>시간 변화·Drift</p></article><article class="viz"><h3>Heatmap</h3><svg viewBox="0 0 120 80" aria-hidden="true"><path d="M18 10h24v24H18z" fill="#d9eff0"/><path d="M45 10h24v24H45z" fill="#007e87"/><path d="M72 10h24v24H72z" fill="#8bc8cb"/><path d="M18 37h24v24H18z" fill="#b51f63"/><path d="M45 37h24v24H45z" fill="#f5dce7"/><path d="M72 37h24v24H72z" fill="#d16c98"/></svg><p>결측·상관 구조</p></article>
     </div></div></section>
 
-<section id="step8" class="section step-card" style="margin-top: 48px;">
-  <div class="section-head">
-    <span class="kicker">08 / ADVANCED GRAPHS</span>
-    <div>
-      <h2>추가로 활용하기 좋은 고급 통계 그래프</h2>
-      <p>이러한 고급 통계 그래프도 파이썬 데이터 시각화 라이브러리(Seaborn, Plotly 등)를 통해 언제든 활용할 수 있습니다.</p>
+<section id="advanced-visuals">
+  <div class="shell">
+    <div class="section-head">
+      <span class="index">08 / ADVANCED GRAPHS</span>
+      <div>
+        <h2>고급 통계 그래프</h2>
+        <p>파이썬 시각화 라이브러리를 통해 실무에 즉시 활용할 수 있는 다차원 통계 그래프입니다.</p>
+      </div>
+    </div>
+    <div class="viz-grid">
+      <article class="viz">
+        <h3 style="margin-top:0; font-size:18px; color:var(--ink);">Violin Plot</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:12px;line-height:1.6">Box plot과 데이터 밀도(KDE) 결합. 데이터의 쌍봉형 굴곡 등 쏠림(Skewness) 파악에 특화.</p>
+      </article>
+      <article class="viz">
+        <h3 style="margin-top:0; font-size:18px; color:var(--ink);">Joint Plot</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:12px;line-height:1.6">가운데의 상관관계(산점도)와 가장자리 분포(히스토그램)를 한눈에 동시에 스캔.</p>
+      </article>
+      <article class="viz">
+        <h3 style="margin-top:0; font-size:18px; color:var(--ink);">Pair Plot</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:12px;line-height:1.6">여러 변수를 NxN 행렬로 짝지어 다차원적 궁합(상관성)을 훑어보는 초기 분석에 최적.</p>
+      </article>
+      <article class="viz">
+        <h3 style="margin-top:0; font-size:18px; color:var(--ink);">Parallel Coord</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:12px;line-height:1.6">고위험 웨이퍼들의 복합적인 레시피 패턴(압력, 온도 등)을 추적선(Trace)으로 시각화.</p>
+      </article>
+      <article class="viz">
+        <h3 style="margin-top:0; font-size:18px; color:var(--ink);">ECDF Plot</h3>
+        <p style="font-size:13px;color:var(--text-dim);margin-top:12px;line-height:1.6">데이터를 0~100% 누적 선으로 그려 상위 10% 꼬리 부분의 미세한 불량률 차이를 수학적으로 비교.</p>
+      </article>
     </div>
   </div>
-  <div class="detail-grid" style="display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 24px; margin-top: 24px;">
-    <section class="detail-block" style="background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border);">
-      <h4 style="margin-top:0; color: var(--text);">1. 바이올린 플롯 (Violin Plot)</h4>
-      <p style="font-size: 14px; color: var(--text-dim);"><strong>특징:</strong> Box plot과 데이터의 밀도(KDE)를 양옆으로 데칼코마니처럼 합친 그래프입니다.</p>
-      <p style="font-size: 14px; color: var(--text-dim); margin-bottom: 0;"><strong>활용처:</strong> 단순한 평균/분산뿐만 아니라 데이터가 쌍봉형(낙타 등 모양)인지, 한쪽으로 쏠렸는지(Skewness) 굴곡을 정확히 볼 수 있습니다. 예) 특정 Tool(설비)에서 불량 데이터가 특정 구간에 군집해 있는지 확인할 때 탁월합니다.</p>
-    </section>
+</section>
     <section class="detail-block" style="background: var(--surface); padding: 24px; border-radius: 12px; border: 1px solid var(--border);">
       <h4 style="margin-top:0; color: var(--text);">2. 조인트 플롯 / 마지널 산점도</h4>
       <p style="font-size: 14px; color: var(--text-dim);"><strong>특징:</strong> 가운데는 산점도나 헥스빈(Hexbin)을 두고, 위쪽과 오른쪽에 변수의 히스토그램을 덧붙인 형태입니다.</p>
