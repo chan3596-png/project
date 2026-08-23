@@ -1,0 +1,362 @@
+# 개인 성과 집중 가이드 — 설치에서 7일 주제 탐구까지
+
+## 1. 이 프로젝트를 왜 하는가
+
+역사학 석사생이 연구질문을 정하고, 사료카드를 만들고, 주장을 반증하며 논문을 완성하듯이 수강생도 일주일 동안 자신의 문제를 깊게 탐구합니다. 목표는 AI 도구를 많이 사용했다는 기록이 아니라 다음 증거를 남기는 것입니다.
+
+1. 내가 선택한 직무 문제
+2. 데이터를 믿을 수 있는지 확인한 기록
+3. 전공 원리와 근거자료
+4. 주가설과 대안가설
+5. 기준모델과 개선모델의 공정한 비교
+6. 실패 사례와 인간의 수정
+7. 사용자의 결정을 돕는 작동형 페이지
+8. 재현 가능한 GitHub 이력과 3분 발표
+
+## 2. 역사 연구와 엔지니어링 탐구의 대응
+
+| 역사학 연구 | 반도체 AI 프로젝트 | 남길 증거 |
+|---|---|---|
+| 연구질문 | 사용자와 의사결정 | `PLAN.md` 문제 한 문장 |
+| 사료카드 | 데이터카드 | 출처·스키마·단위·생성시점 |
+| 사료비판 | 데이터 감사 | 결측·중복·이상치·편중·누수 |
+| 선행연구 | 전공 원리와 Governing equation 후보 | 교재·논문·공식문서 링크 |
+| 주장감사 | 주가설·대안가설·반증조건 | 가설표와 필요한 그래프 |
+| 본문 논증 | 기준모델·개선모델·오차 분석 | Holdout 지표와 실패 사례 |
+| 논문 결론 | 사용자 결정·한계·추가실험 | Live Page와 3분 발표 |
+
+## 3. 1강에서 설치부터 첫 증거까지
+
+### STEP 0 — 계정 준비
+
+- 개인 GitHub 계정을 만들고 이메일 인증을 완료합니다.
+- Google 계정으로 Antigravity를 사용할 수 있는지 확인합니다.
+- Claude Code 또는 Codex 중 사용할 Coding Agent 계정을 확인합니다.
+- 실제 회사 데이터·공정 Spec·장비 Log·개인정보를 공개 저장소에 올리지 않기로 확인합니다.
+
+### STEP 1 — 조사 도구와 제작 도구 설치
+
+#### Windows 11
+
+1. [VS Code](https://code.visualstudio.com/download)의 User Installer를 설치합니다.
+2. [Git for Windows](https://git-scm.com/install/windows)를 기본 옵션으로 설치합니다.
+3. [Python](https://www.python.org/downloads/windows/) 설치 첫 화면에서 `Add python.exe to PATH`를 선택합니다.
+4. [Google Antigravity](https://antigravity.google/)를 설치하고 로그인합니다.
+5. Claude Code 또는 Codex 중 하나를 설치합니다.
+
+Claude Code:
+
+```powershell
+irm https://claude.ai/install.ps1 | iex
+```
+
+Codex:
+
+```powershell
+powershell -ExecutionPolicy ByPass -c "irm https://chatgpt.com/codex/install.ps1 | iex"
+```
+
+6. PowerShell을 닫고 새로 엽니다.
+
+#### macOS
+
+1. [VS Code](https://code.visualstudio.com/download)를 Applications로 이동합니다.
+2. [Git](https://git-scm.com/download/mac)과 [Python](https://www.python.org/downloads/macos/)을 설치합니다.
+3. VS Code에서 Command Palette를 열고 `Shell Command: Install 'code' command in PATH`를 실행합니다.
+4. [Google Antigravity](https://antigravity.google/)를 설치하고 로그인합니다.
+5. Claude Code 또는 Codex 중 하나를 설치합니다.
+
+Claude Code:
+
+```bash
+curl -fsSL https://claude.ai/install.sh | bash
+```
+
+Codex:
+
+```bash
+curl -fsSL https://chatgpt.com/codex/install.sh | sh
+```
+
+6. Terminal을 닫고 새로 엽니다.
+
+각 도구의 역할:
+
+- VS Code: 파일과 Terminal을 한 화면에서 관리
+- Git: 변경 이력과 사람의 판단을 기록
+- Python: 데이터 감사·그래프·모델 실행
+- Antigravity: 웹·논문·공식문서 조사와 근거카드 작성
+- Claude Code 또는 Codex: 저장소를 읽고 분석·보고서·웹페이지·테스트를 제작
+
+### STEP 2 — 버전 확인
+
+Windows PowerShell:
+
+```powershell
+git --version
+py --version
+code --version
+claude --version  # Claude Code 선택자
+codex --version   # Codex 선택자
+```
+
+macOS Terminal:
+
+```bash
+git --version
+python3 --version
+code --version
+claude --version  # Claude Code 선택자
+codex --version   # Codex 선택자
+```
+
+성공 기준은 Git·Python·VS Code와 선택한 `claude` 또는 `codex`가 버전을 표시하고, Antigravity 앱 로그인까지 완료되는 것입니다. Python은 3.11 이상을 사용합니다.
+
+### STEP 3 — 선택한 Coding Agent 로그인과 진단
+
+Claude Code:
+
+```bash
+claude --version
+claude doctor
+claude
+```
+
+Codex:
+
+```bash
+codex login
+codex login status
+codex doctor
+```
+
+브라우저에서 자신의 계정으로 로그인합니다. API Key·비밀번호·인증 화면을 Telegram이나 저장소에 올리지 않습니다.
+
+### STEP 4 — 개인 저장소 생성과 Clone
+
+Starter Repository에서 `Use this template`을 눌러 공개 저장소 `semiconductor-ai-project`를 만듭니다.
+
+```bash
+cd ~/Documents
+git clone YOUR_REPOSITORY_HTTPS_URL semiconductor-ai-project
+cd semiconductor-ai-project
+code .
+```
+
+Windows PowerShell에서 문서 폴더 이동이 실패하면 다음을 사용합니다.
+
+```powershell
+cd $HOME\Documents
+```
+
+### STEP 5 — 자동점검
+
+Windows:
+
+```powershell
+py tools/student_preflight.py
+```
+
+macOS:
+
+```bash
+python3 tools/student_preflight.py
+```
+
+마지막 줄의 `READY: core environment checks passed`를 첫 통과 증거로 남깁니다.
+
+### STEP 6 — 저장소를 수정하지 않고 설명하게 하기
+
+```text
+AGENTS.md, README.md, PLAN.md를 먼저 읽어라.
+아직 파일을 수정하지 마라.
+입력 데이터, 데이터 감사, 기준모델, 개선모델, 웹페이지,
+테스트, 배포 흐름을 실제 파일명을 근거로 설명하라.
+확인되지 않은 반도체 사실은 추가하지 마라.
+```
+
+사람은 없는 파일·명령을 만들지 않았는지, 원본 데이터를 수정하라고 하지 않았는지 확인합니다.
+
+## 4. 도구별 역할과 인계 규칙
+
+### Antigravity — 자료조사
+
+Antigravity에서는 웹·논문·공식문서를 찾아 전공 근거카드와 변수 정의를 만듭니다. 검색 결과 요약을 그대로 쓰지 않고 원문을 열어 확인합니다.
+
+```text
+주제: [내 주제]
+사용자 결정: [결정]
+
+관련 전공 원리, Governing equation·도메인 제약 후보,
+변수 정의, 대표 분석법, 알려진 한계를 조사하라.
+각 결과에 원문 URL, 문서명, 저자·기관, 날짜,
+직접 확인한 사실, 적용 범위, 미확인 사항을 붙여라.
+```
+
+조사 결과는 `research/SOURCES.md`로 저장합니다. 수식 하나마다 변수 정의·단위·적용 조건·원문 위치를 기록합니다.
+
+### Claude Code 또는 Codex — 분석·보고서 제작
+
+둘 중 하나만 선택합니다. Coding Agent는 조사 결과를 진실로 가정하지 않고 데이터와 원문으로 다시 검증합니다.
+
+```text
+AGENTS.md, PLAN.md, research/SOURCES.md를 먼저 읽어라.
+출처가 확인된 사실, 작업가설, 현재 데이터로 말할 수 없는 것을 구분하라.
+아직 수정하지 말고 데이터 감사 → 기준모델 → Holdout → 오차 분석 →
+보고서 → docs 웹페이지 → 테스트의 계획을 작성하라.
+```
+
+### GitHub와 Pages — 포트폴리오
+
+- GitHub: 질문, 조사, 분석, AI 오류, 사람의 수정, 테스트 이력을 Commit으로 보존
+- GitHub Pages: 문제·근거·작동 데모·성능·오차·한계를 한 주소에서 제시
+- 공개 금지: 실제 회사 데이터, 공정 Spec, 장비 Log, 고객·개인정보, API Key
+
+### 최소 인계 패킷
+
+```text
+문제 한 문장:
+사용자 결정:
+근거 출처 3개:
+데이터 한 행과 입력·출력:
+주가설 / 대안가설 / 반증조건:
+기준모델:
+성능 KPI / 위험 KPI:
+최종 Pages 화면:
+```
+
+## 5. 자신의 주제를 탐구하는 10단계
+
+### 1단계 — 직무와 사용자 한 명
+
+공정·설비·소자·양산기술 중 하나를 고르고 실제 결정을 내릴 사용자 역할을 한 명만 씁니다.
+
+### 2단계 — 반복되는 관측과 결정
+
+사용자가 매일 보는 숫자와 그 뒤에 내리는 행동을 적습니다. `수율 예측`이 아니라 `어떤 Tool을 먼저 점검할지 선택`처럼 씁니다.
+
+### 3단계 — 데이터카드
+
+다음을 `PLAN.md`에 기록합니다.
+
+```text
+한 행의 단위:
+생성·관측 시점:
+입력 신호와 단위:
+품질 결과와 측정 시점:
+결측·이상치 발생 가능성:
+Tool·Lot·기간 편중:
+미래정보 누수 위험:
+```
+
+### 4단계 — 전공 근거카드
+
+관련 전공과목, 핵심 현상, Governing equation 또는 도메인 제약 후보를 적습니다. AI가 제안한 수식은 후보일 뿐이며 교재·논문·공식 문서에서 적용 조건과 변수 정의를 확인합니다.
+
+```text
+근거자료:
+자료가 직접 말하는 것:
+프로젝트에 적용 가능한 범위:
+자료가 말하지 않는 것:
+확인한 사람과 날짜:
+```
+
+### 5단계 — 주장감사
+
+| 구분 | 작성 내용 |
+|---|---|
+| 관찰 사실 | 그래프와 숫자로 직접 확인한 것 |
+| 주가설 | 가장 먼저 검증할 설명 |
+| 대안가설 | Sensor, Recipe, Tool, 시간 등 다른 설명 |
+| 반증조건 | 어떤 결과가 나오면 가설을 버릴 것인가 |
+| 추가자료 | 판단을 위해 더 필요한 측정 |
+
+### 6단계 — 데이터 감사
+
+스키마 → 단위 → 결측 → 중복 → 이상치 → Tool·Lot·시간 편중 → 누수 순서로 확인합니다. 처리 전후의 결과를 함께 남기며 원본은 수정하지 않습니다.
+
+### 7단계 — 기준모델
+
+- 회귀: 평균 또는 단순 선형회귀
+- 분류: 다수 클래스 또는 단순 임계값
+- 시계열: 이전 Run 또는 이동평균
+- 최적화: 현재 Recipe 또는 단일 KPI 최대화
+
+복잡한 AI가 기준모델보다 Holdout에서 실제로 나은지 확인합니다.
+
+### 8단계 — 개선모델과 실패 사례
+
+성능 숫자 하나만 보고 끝내지 않습니다. Tool·Lot·기간별 성능과 중요한 오차 사례 세 개를 확인하고, AI의 설명이 원자료와 맞는지 검증합니다.
+
+### 9단계 — 작동형 MVP
+
+필수 화면은 다음 여섯 개입니다.
+
+1. 데이터 선택 또는 CSV 입력
+2. 데이터 품질 진단
+3. 기준모델과 개선모델 비교
+4. 입력 두 개 이상의 What-if 조작
+5. 위험도·추천·추가실험
+6. 한계와 인간 검증 기록
+
+### 10단계 — GitHub 증거와 발표
+
+모든 주요 단계에서 작은 Commit을 남깁니다. 최종 발표는 문제 30초, 데이터·가설 30초, 데모 50초, 성능 30초, 인간 검증 20초, 효과·한계 20초로 구성합니다.
+
+## 6. 대표 탐구 — Photo PR Coat·Expose·Develop
+
+### 문제 정의
+
+> Photo 공정 엔지니어가 PR tone·코팅 두께·Dose·Focus·PEB·현상조건을 보고 CD·CDU·LER와 Scum·Collapse 위험을 함께 비교하여 먼저 검증할 작은 DOE 조건을 선택할 수 있게 한다.
+
+### 데이터카드
+
+- 한 행: 하나의 Photo 측정 Sample 또는 Field
+- 입력: PR tone, retained pattern source, 코팅 두께, 정규화 Dose, Focus, Soft Bake, PEB, 현상시간·농도
+- 결과: 교육용 CD·CDU·LER·Scum·Collapse·Defect·Spec pass
+- 시간 규칙: 노광·현상 이후의 품질 결과를 입력 변수처럼 미리 사용하지 않음
+- 편중 후보: PR tone, Tool, Lot, Field 위치, 측정 순서
+
+### 세 개의 검증 질문
+
+1. Dose–CD 관계가 PR tone별로 다르며, tone을 섞으면 약해지거나 반전되는가?
+2. 코팅 두께와 PEB·현상시간의 상호작용이 CD·Scum·Collapse와 함께 나타나는가?
+3. 관찰된 관계가 Tool·Field·Lot 편중 또는 혼합단위 오류로도 설명되는가?
+
+### 기준과 개선
+
+- 기준: 전체 평균 또는 단순 선형회귀
+- 개선 후보: PR tone 분리와 두께×Dose·PEB·현상 상호작용을 포함한 모델
+- 성능 KPI: Holdout CD 오차와 Spec pass 분류 성능
+- 위험 KPI: CD는 맞지만 Scum·Collapse 위험을 놓치는 비율
+- 오차 분석: 큰 CD 오차 3건과 놓친 결함 위험 3건
+
+### 최종 MVP 화면
+
+1. Positive·Negative PR tone 선택
+2. 코팅 두께·Dose·Focus·PEB·현상시간 조작
+3. 예상 CD·CDU·LER와 Scum·Collapse 위험
+4. 전체 기준모델과 tone 분리 개선모델 비교
+5. 현재 조건과 작은 DOE 후보의 전후 비교
+6. 대안 설명, 적용 한계와 추가 계측 항목
+
+## 7. 설치 실패 시 수업을 멈추지 않는 법
+
+- `code`만 실패: VS Code를 직접 실행합니다.
+- Windows가 Python 대신 Store를 열면 `py`를 사용합니다.
+- Claude Code·Codex가 보이지 않으면 Terminal을 닫고 새로 엽니다.
+- 관리자 권한이 없으면 GitHub 웹 편집과 제공된 결과물로 수업을 계속합니다.
+- WSL을 처음 설치하는 작업은 수업 중 하지 않습니다.
+- 10분 이상 막히면 `🟡 번호/단계/오류 한 줄`만 Telegram에 보내고 다음 분석 단계로 이동합니다.
+
+## 8. 최종 완료 기준
+
+- [ ] 문제와 사용자의 결정이 한 문장이다.
+- [ ] 데이터카드와 전공 근거카드가 있다.
+- [ ] 주가설·대안가설·반증조건이 있다.
+- [ ] 기준모델과 Holdout 비교가 있다.
+- [ ] 오차 사례와 AI의 인간 검증 기록이 있다.
+- [ ] 입력 두 개 이상이 움직이는 Live Page가 있다.
+- [ ] 실제 회사자료 없이 재현할 수 있다.
+- [ ] GitHub Commit이 탐구 과정을 보여준다.
+- [ ] 3분 안에 문제·증거·한계를 설명할 수 있다.
